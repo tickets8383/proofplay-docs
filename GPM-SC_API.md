@@ -12,6 +12,8 @@ All endpoints return JSON. Errors return `{"detail": "error message"}` with appr
 
 GPM-SC (Generative Paradox Machine - Stratified Coherence) provides formal logic verification and paradox resolution with cryptographic audit trails.
 
+**New:** Natural Language Support! The `/verify/natural` endpoint allows you to verify statements in plain English - no formal logic knowledge required. Perfect for beginners or quick checks.
+
 ### Pricing Tiers
 
 | Tier | What You Get | Cost |
@@ -43,7 +45,7 @@ RapidAPI automatically adds these headers when using their client libraries.
 ### Direct Access
 
 For direct API access, authentication depends on the endpoint:
-- **Free tier endpoints** (`/verify`, `/verify/logic`, `/classify`): No authentication required
+- **Free tier endpoints** (`/verify`, `/verify/natural`, `/verify/logic`, `/classify`, `/examples`): No authentication required
 - **BYOK endpoints** (`/synthesize`, `/ask`): Provide `X-Anthropic-Key` or `X-OpenAI-Key` header
 - **Pro tier features**: Requires RapidAPI subscription
 
@@ -214,6 +216,66 @@ Returns 503 if service is not ready.
 ---
 
 ## Verification Endpoints
+
+### POST `/verify/natural`
+
+Verify a statement in plain English. **FREE TIER** - No API key required, no LLM needed.
+
+This is the **accessibility layer for non-experts**. It accepts plain English statements and translates them to formal logic internally, making GPM-SC accessible without requiring formal logic knowledge.
+
+**Rate Limits:**
+- Free: 50 requests/minute
+- Pro: 500 requests/minute
+
+**Request:**
+```json
+{
+  "statement": "If it's raining, then it's raining",
+  "explain_formal": true
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "is_logically_valid": true,
+  "is_paradox": false,
+  "paradox_type": null,
+  "plain_english_explanation": "This is a tautology - a statement that is always true by its logical structure. The statement essentially says 'if A then A', which cannot be false.",
+  "formal_translation": "∀p:Prop . p → p",
+  "formal_explanation": "Your statement was translated to: ∀p:Prop . p → p\n\nIn this notation:\n• ∀ means 'for all' (universal quantifier)\n• → means 'implies' or 'if...then'\n• :Prop means 'of type Proposition'",
+  "confidence": 0.9,
+  "suggestions": null,
+  "processing_time_ms": 45.2,
+  "cost_usd": 0.0
+}
+```
+
+**Supported Patterns:**
+- **Tautology**: "If it's raining, then it's raining"
+- **Liar Paradox**: "This statement is false"
+- **Contradiction**: "Something is both true and false"
+- **Universal**: "All humans are mortal"
+- **Excluded Middle**: "A or not A"
+
+**Example - Liar Paradox:**
+```json
+{
+  "statement": "This statement is false"
+}
+```
+
+Returns `is_paradox: true` with explanation of the paradox.
+
+**Features:**
+- Automatic translation to formal logic
+- Beginner-friendly explanations
+- Optional formal notation guide
+- Learning suggestions
+- Zero cost ($0.00)
+
+---
 
 ### POST `/verify`
 
@@ -589,6 +651,52 @@ Get usage statistics for the authenticated user. Requires RapidAPI key.
   "tier": "pro"
 }
 ```
+
+---
+
+## Examples Endpoint
+
+### GET `/examples`
+
+Get example inputs for each endpoint. **FREE TIER** - No authentication required.
+
+Returns example inputs showing how to use each endpoint, making it easier for new users to get started.
+
+**Response:**
+```json
+{
+  "description": "Example inputs for GPM-SC API endpoints",
+  "endpoints": {
+    "/verify/natural": {
+      "description": "Verify statements in plain English (easiest, no formal logic required)",
+      "examples": [
+        {
+          "input": {"statement": "If it's raining, then it's raining"},
+          "expected": "Valid tautology - always true"
+        },
+        {
+          "input": {"statement": "This statement is false"},
+          "expected": "Liar Paradox detected"
+        }
+      ]
+    },
+    "/verify": {
+      "description": "Verify formal logic propositions (requires FAL notation)",
+      "examples": [...]
+    },
+    "/synthesize": {
+      "description": "Paradox resolution using LLM (requires API key)",
+      "examples": [...]
+    }
+  }
+}
+```
+
+**Use Cases:**
+- Learning how to use the API
+- Understanding input formats
+- Finding the right endpoint for your use case
+- Copy-paste examples for testing
 
 ---
 

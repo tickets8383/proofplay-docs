@@ -133,7 +133,17 @@ GPM-SC (Generative Paradox Machine - Stratified Coherence) provides:
 
 ### Quick Start
 
-#### Free Verification
+#### Natural Language Verification (Easiest - No Formal Logic Required)
+
+```bash
+curl -X POST https://gpmsc-api.onrender.com/verify/natural \
+  -H "X-RapidAPI-Key: YOUR_KEY" \
+  -H "X-RapidAPI-Host: gpmsc-api.onrender.com" \
+  -H "Content-Type: application/json" \
+  -d '{"statement": "If it'\''s raining, then it'\''s raining"}'
+```
+
+#### Free Verification (Formal Logic)
 
 ```bash
 curl -X POST https://gpmsc-api.onrender.com/verify \
@@ -141,6 +151,12 @@ curl -X POST https://gpmsc-api.onrender.com/verify \
   -H "X-RapidAPI-Host: gpmsc-api.onrender.com" \
   -H "Content-Type: application/json" \
   -d '{"proposition": "p → p"}'
+```
+
+#### Get Examples
+
+```bash
+curl https://gpmsc-api.onrender.com/examples
 ```
 
 #### BYOK Synthesis
