@@ -1,68 +1,75 @@
 # GPM-SC & ProofPlay v2.0: Enterprise Verification Engine
 
-**Current Version:** 2.0.0 (Production)
-**Status:** Live on RapidAPI / Google Play / App Store
+**Current Version:** 2.0.0 (Production)  
+**Status:** Live on RapidAPI / Dashboard / Mobile (iOS uploading soon, Android testers welcome)  
+**Date:** January 2026
 
-## 🚀 Overview
-GPM-SC (General Purpose Meta-Symbolic Computation) has evolved from a simple gaming RNG into a **Hybrid Neuro-Symbolic Logic Engine**. Version 2.0 introduces formal verification standards, cryptographic auditing, and legal compliance templates for Enterprise AI and Regulated Gaming.
+### 🚀 Overview
+GPM-SC (General Purpose Meta-Symbolic Computation) has evolved from a provably fair gaming RNG into a full Hybrid Neuro-Symbolic Logic Engine. Version 2.0 delivers formal verification, cryptographic auditing, and pre-loaded legal compliance templates—for Enterprise AI, AI safety evals, RegTech, and regulated gaming.
 
----
+### 💎 Key Features (v2.0)
+1. **Cryptographic "Black Box" Auditing (RFC 3161)**  
+   Every critical interaction generates a court-admissible audit receipt for non-repudiation.
 
-## 💎 Key Features (v2.0)
+   Example Response Schema:
+   ```json
+   {
+     "result": "Satisfiable",
+     "proof": {
+       "hash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+       "timestamp": "2026-01-03T12:00:00Z",
+       "anchor_id": "audit_8843a",
+       "verification_method": "SMT_Z3"
+     }
+   }
 
-### 1. Cryptographic "Black Box" Auditing (RFC 3161)
-Every API interaction now generates a court-admissible audit receipt. This ensures non-repudiation for AI logic and gaming outcomes.
+Standard SMT-LIB 2.6 Interoperability
+Export proofs in industry-standard .smt2 format. Enterprise teams can independently verify using Z3, CVC5, or Yices—no vendor lock-in.
+Legal & Compliance Templates (MATL)
+Pre-loaded Meta-Axiom Template Library for:  GDPR/HIPAA: Data subject rights & deletion obligations  
+Contract Law: Normative clause conflict detection  
+Paradox Resolution: Safe handling of Liar's vs valid tautologies
 
-**Response Schema:**
-```json
-{
-  "result": "Satisfiable",
-  "proof": {
-    "hash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "timestamp": "2024-01-01T12:00:00Z",
-    "anchor_id": "audit_8843a",
-    "verification_method": "SMT_Z3"
-  }
-}
-2. Standard SMT-LIB 2.6 Interoperability
+"Bring Your Own Key" (BYOK) Architecture
+Separate logic compute (free) from LLM compute (pass-through costs):  /verify/logic: FREE CPU-based Z3 verification  
+/ask, /synthesize: User-provided keys (no storage on our side)
 
-We no longer just run logic internally. GPM-SC now exports logic proofs in the industry-standard SMT-LIB 2.6 format (.smt2).
+Supported Headers:  X-Anthropic-Key / X-Anthropic-Model  
+X-OpenAI-Key / X-OpenAI-Model  
+X-Prefer-Local: true (Ollama fallback)
 
-Benefit: Enterprise security teams can verify our audit receipts using their own solvers (Microsoft Z3, CVC5, Yices) to confirm correctness without vendor lock-in.
+ API ReferenceMethod
+Endpoint
+Description
+Cost
+POST
+/verify/logic
+Pure logical proposition verification (Z3)
+Free
+POST
+/synthesize
+Paradox resolution / axiom synthesis (LLM)
+BYOK
+POST
+/ask
+General Q&A with LLM
+BYOK
+POST
+/raffle/draw
+Provably fair winner selection
+Freemium
+GET
+/v2/usage
+Check quota & tier limits
+Free
 
-3. Legal & Compliance Templates (MATL)
+Live APIs:  Reasoning Verifier: https://rapidapi.com/watkins905/api/gpm-sc-reasoning-verifier  
+Provably Fair RNG: https://rapidapi.com/watkins905/api/provably-fair-rng-the-chainlink-vrf-alternative/
 
-The engine now includes the Meta-Axiom Template Library (MATL) pre-loaded with axiomatic structures for:
+Dashboard: https://proofplay-dashboard.vercel.app
+Public Verifier Demo: https://proofplay-one.vercel.app Security & PrivacyEphemeral Keys: BYOK headers used only for the request—never logged or stored.  
+Adversarial Hardening: Guards against jailbreaks ("DAN" etc.) and instruction attacks.  
+DoS Protection: Strict timeouts (2.0s) and input limits on free tier.
 
-GDPR/HIPAA: "If Data Subject is EU Citizen -> Obligation to Delete."
+Contact: DM on X or email for pilots, custom integrations, or enterprise licensing.
 
-Contract Law: Conflict detection between normative clauses.
-
-Paradox Resolution: Distinguishes between "Liar's Paradox" (Error) and "Law of Excluded Middle" (Valid).
-
-4. "Bring Your Own Key" (BYOK) Architecture
-
-To solve the "Unit Economics" of AI, v2.0 separates Logic Compute from LLM Compute.
-
-Logic Verification (/verify/logic): FREE. Runs on our CPU-based Z3 cluster.
-
-Generative AI (/ask, /synthesize): Cost pass-through. Users provide their own keys via headers.
-
-Supported Headers:
-
-X-Anthropic-Key: For Claude 3.5 Sonnet reasoning.
-
-X-RapidAPI-Key: For metered billing and rate-limiting.
-
-📚 API Reference (New Endpoints)
-Method	Endpoint	Description	Cost
-POST	/verify/logic	[NEW] Verify pure logical propositions using Z3. No LLM required.	Free
-GET	/v2/usage	[NEW] Check remaining quota and current tier limits.	Free
-POST	/v2/games/{id}/draw	[NEW] Draw a number with a guaranteed Cryptographic Receipt.	Paid
-POST	/v2/certificate/{id}	[NEW] Generate a PDF compliance certificate for a transaction.	Paid
-🔒 Security & Privacy
-Ephemeral Processing: User API keys (X-Anthropic-Key) are used strictly for transient compute and are never stored in plain text.
-
-Adversarial Hardening: Input guards block "DAN" mode and "Ignore Instructions" attacks.
-
-DoS Protection: Free tier inputs are strictly bounded (2.0s timeout, 1000 char limit).
