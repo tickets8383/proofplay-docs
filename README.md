@@ -1,4 +1,3 @@
-````markdown
 # ProofPlay Documentation
 
 ProofPlay is **verifiable decision infrastructure**: deterministic rule/logic verification + tamper-evident audit trails + **RFC 3161 TSA timestamp anchoring** so a third party can re-verify what was decided, when, and that it wasn’t modified.
