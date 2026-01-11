@@ -284,7 +284,7 @@ GET /ready
 
 ## Client-Side Verification
 
-For full trustless verification, use our [web verifier](https://proofplay-one.vercel.app) or implement client-side:
+For full trustless verification, use our [web verifier](https://verification-logic-demo.vercel.app) or implement client-side:
 
 ```javascript
 // 1. Fetch verification data
@@ -354,4 +354,4 @@ Coming soon:
 ## Support
 
 - **Email:** tickets8383@icloud.com
-- **Web Verifier:** [proofplay-one.vercel.app](https://proofplay-one.vercel.app)
+- **Web Verifier:** [verification-logic-demo.vercel.app](https://verification-logic-demo.vercel.app)

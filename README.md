@@ -11,7 +11,7 @@ This repository contains documentation for ProofPlay services and APIs.
 Provably fair gaming infrastructure with cryptographic audit trails. A bingo game built on enterprise-grade audit infrastructure where every random draw is committed to a third-party timestamp authority *before* the number is revealed.
 
 - **API:** `https://proofplay-sx3q.onrender.com`
-- **Verifier:** [proofplay-one.vercel.app](https://proofplay-one.vercel.app)
+- **Verifier:** [verification-logic-demo.vercel.app](https://verification-logic-demo.vercel.app)
 - **Documentation:** [API Reference](API.md)
 - **Examples:** [examples/](examples/)
 
@@ -43,7 +43,7 @@ Formal logic verification and paradox resolution with cryptographic audit trails
 
 ### Try It Now
 
-1. Visit the [Web Verifier](https://proofplay-one.vercel.app)
+1. Visit the [Web Verifier](https://verification-logic-demo.vercel.app)
 2. Enter game ID: `077c56e6`
 3. Click "Verify Game Integrity"
 4. Watch the client-side cryptographic verification

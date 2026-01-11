@@ -42,4 +42,4 @@ node verify_javascript.js 077c56e6
 
 ## Web Verifier
 
-For a visual verification experience, use our [Web Verifier](https://proofplay-one.vercel.app).
+For a visual verification experience, use our [Web Verifier](https://verification-logic-demo.vercel.app).
