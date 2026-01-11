@@ -50,7 +50,7 @@ Provably fair bingo built on the same audit infrastructure: **commit-before-reve
 
 - **iOS app:** https://apps.apple.com/us/app/proofplay/id6756788981
 - **API:** https://proofplay-sx3q.onrender.com
-- **Web Verifier:** https://verification-logic-demo.vercel.app
+- **Web Verifier:** https://proofplay-one.vercel.app
 - **Docs:** `API.md`
 - **Examples:** `examples/`
 
